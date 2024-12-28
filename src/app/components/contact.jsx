@@ -10,38 +10,22 @@ const Contact = () => {
   const sendEmail = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
+    console.log('Starting email send...');
+    console.log('Service ID:', process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID);
+    
     try {
-      await emailjs.sendForm(
+      const result = await emailjs.sendForm(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
         formRef.current,
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
       );
-
-      toast.success('Message sent successfully!', {
-        duration: 4000,
-        position: 'top-center',
-        style: {
-          background: '#1a1a3a',
-          color: '#fff',
-          border: '1px solid #F39C12',
-        },
-        icon: '✉️',
-      });
-
+      console.log('Success:', result.text);
+      toast.success('Message sent successfully!');
       formRef.current.reset();
     } catch (error) {
-      toast.error('Failed to send message. Please try again.', {
-        duration: 4000,
-        position: 'top-center',
-        style: {
-          background: '#1a1a3a',
-          color: '#fff',
-          border: '1px solid #ef4444',
-        },
-        icon: '❌',
-      });
+      console.error('Error details:', error);
+      toast.error(`Failed to send message: ${error.message}`);
     } finally {
       setIsSubmitting(false);
     }
