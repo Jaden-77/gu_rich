@@ -22,19 +22,16 @@ export default function RootLayout({ children }) {
         <Toaster 
           position="top-center"
           toastOptions={{
-            // Styling all toasts
             style: {
               background: '#1a1a3a',
               color: '#fff',
             },
-            // Styling success toasts
             success: {
               duration: 4000,
               style: {
                 border: '1px solid #F39C12',
               },
             },
-            // Styling error toasts
             error: {
               duration: 4000,
               style: {

@@ -2,17 +2,12 @@
 import { useState, useEffect } from 'react';
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['hero', 'services', 'about', 'projects', 'contact'];
-      const scrollPosition = window.scrollY + 100; // Offset for better trigger point
+      const scrollPosition = window.scrollY + 100;
 
       sections.forEach(sectionId => {
         const element = document.getElementById(sectionId);
@@ -38,20 +33,41 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 w-full bg-[#0a0a29]/90 backdrop-blur-sm z-50 shadow-lg">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <a className="btn btn-primary text-xl bg-primary text-neutral border border-primary hover:bg-primary">
+    <div className="navbar bg-[#0a0a29]/90 backdrop-blur-sm fixed top-0 z-50 shadow-lg">
+      <div className="navbar-start">
+        <div className="dropdown">
+          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+            </svg>
+          </div>
+          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-[#0a0a29]/95 backdrop-blur-sm rounded-box w-52">
+            {navLinks.map(({ href, label }) => (
+              <li key={href}>
+                <a 
+                  href={href}
+                  className={`${
+                    activeSection === href.slice(1)
+                      ? 'text-[#F39C12] font-semibold'
+                      : 'text-white hover:text-[#F39C12]'
+                  }`}
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <a className="btn btn-primary text-xl bg-primary text-neutral border border-primary hover:bg-primary">
             <img src="/logo1.png" alt="Logo" className="h-12" />
             GU Rich
           </a>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map(({ href, label }) => (
+      </div>
+      <div className="navbar-end hidden lg:flex">
+        <ul className="menu menu-horizontal px-1">
+          {navLinks.map(({ href, label }) => (
+            <li key={href}>
               <a
-                key={href}
                 href={href}
                 className={`transition-all duration-300 ${
                   activeSection === href.slice(1)
@@ -61,63 +77,11 @@ const Navbar = () => {
               >
                 {label}
               </a>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button 
-            onClick={toggleMenu}
-            className="md:hidden text-white p-2 hover:bg-[#F39C12]/10 rounded-lg transition-colors"
-          >
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="h-6 w-6" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor"
-            >
-              {isMenuOpen ? (
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M6 18L18 6M6 6l12 12" 
-                />
-              ) : (
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M4 6h16M4 12h16M4 18h16" 
-                />
-              )}
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu (Dropdown) */}
-      <div 
-        className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}
-      >
-        <div className="px-2 pt-2 pb-3 space-y-1 bg-[#0a0a29]/95 backdrop-blur-sm">
-          {navLinks.map(({ href, label }) => (
-            <a
-              key={href}
-              href={href}
-              onClick={toggleMenu}
-              className={`block px-3 py-2 transition-all duration-300 ${
-                activeSection === href.slice(1)
-                  ? 'text-[#F39C12] font-semibold bg-[#F39C12]/10'
-                  : 'text-white hover:text-[#F39C12]'
-              }`}
-            >
-              {label}
-            </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
-    </nav>
+    </div>
   );
 };
 

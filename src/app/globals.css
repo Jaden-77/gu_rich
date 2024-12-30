@@ -31,3 +31,9 @@ body {
     text-wrap: balance;
   }
 }
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}

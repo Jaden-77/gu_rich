@@ -53,7 +53,7 @@ const About = () => {
           </p>
         </div>
 
-        {/* Stats Cards */}
+        {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {stats.map((stat, index) => (
             <div

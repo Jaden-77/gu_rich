@@ -1,5 +1,3 @@
-// import { IoIosArrowDown } from "react-icons/io";
-
 const Hero = () => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center">
@@ -35,7 +33,6 @@ const Hero = () => {
         </a>
       </div>
 
-      {/* Scroll Down Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <a href="#services" className="text-white">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

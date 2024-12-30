@@ -7,7 +7,6 @@ const Projects = () => {
           <div className="w-24 h-1 bg-[#F39C12] mx-auto mt-4"></div>
         </h2>
 
-        {/* Coming Soon / No Projects Display */}
         <div className="max-w-4xl mx-auto text-center">
           <div className="bg-gray-50 rounded-lg p-12 shadow-sm">
             <div className="mb-6">
